@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فلج الواشحي - قرية افي</title>
+<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;500;600;700&family=Cairo:wght@300;400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  :root {
+    --green: #2d6a4f;
+    --green-light: #52b788;
+    --green-pale: #d8f3dc;
+    --green-card: #b7e4c7;
+    --orange: #e76f00;
+    --orange-light: #f4a261;
+    --orange-pale: #fde8d2;
+    --orange-card: #ffb347;
+    --bg: #f5f0e8;
+    --bg2: #ece5d8;
+    --text: #1a1a1a;
+    --text-muted: #6b6b6b;
+    --border: #d4c9b5;
+    --white: #fff;
+    --shadow: 0 4px 24px rgba(0,0,0,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Cairo', 'Noto Sans Bengali', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    direction: rtl;
+  }
+  body[lang="bn"] { font-family: 'Noto Sans Bengali', 'Cairo', sans-serif; }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 50%, #40916c 100%);
+    color: #fff;
+    padding: 28px 24px 18px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  header h1 {
+    font-family: 'Scheherazade New', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    position: relative;
+  }
+  header p {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    margin-top: 4px;
+    position: relative;
+  }
+  .header-badges {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 12px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.82rem;
+    backdrop-filter: blur(4px);
+  }
+
+  /* TODAY BANNER */
+  .today-banner {
+    background: linear-gradient(90deg, var(--green) 0%, var(--green-light) 100%);
+    color: #fff;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.95rem;
+  }
+  .today-banner.is-qad {
+    background: linear-gradient(90deg, var(--orange) 0%, var(--orange-light) 100%);
+  }
+  .today-info { font-weight: 600; font-size: 1.05rem; }
+  .today-detail { opacity: 0.9; font-size: 0.88rem; }
+
+  /* NAV */
+  .nav-bar {
+    background: var(--white);
+    border-bottom: 2px solid var(--border);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .nav-controls { display: flex; gap: 8px; align-items: center; }
+  .nav-btn {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 16px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text);
+  }
+  .nav-btn:hover { background: var(--green-pale); border-color: var(--green); color: var(--green); }
+  .nav-btn.today-btn { background: var(--green); color: #fff; border-color: var(--green); }
+  .nav-btn.today-btn:hover { background: var(--green-light); }
+  .week-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--green);
+    min-width: 180px;
+    text-align: center;
+  }
+  .view-toggle { display: flex; gap: 4px; }
+  .view-btn {
+    padding: 6px 12px;
+    border: 1.5px solid var(--border);
+    background: var(--bg);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.2s;
+  }
+  .view-btn.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    gap: 16px;
+    padding: 10px 20px;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    align-items: center;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot {
+    width: 14px; height: 14px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .legend-dot.green { background: var(--green); }
+  .legend-dot.orange { background: var(--orange); }
+
+  /* WEEK VIEW */
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    border: 1.5px solid var(--border);
+    margin: 16px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: var(--white);
+  }
+  .day-col {
+    border-left: 1px solid var(--border);
+    background: var(--white);
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+  }
+  .day-col:last-child { border-left: none; }
+  .day-col.is-today { background: #f0faf4; }
+  .day-col.is-qad-day { background: #fff8f0; }
+
+  .day-header {
+    padding: 10px 8px 8px;
+    text-align: center;
+    border-bottom: 1.5px solid var(--border);
+    background: var(--bg2);
+  }
+  .day-col.is-today .day-header { background: var(--green-pale); }
+  .day-col.is-qad-day .day-header { background: var(--orange-pale); }
+  .day-name { font-weight: 700; font-size: 0.88rem; color: var(--text); }
+  .day-date { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+  .day-num {
+    display: inline-block;
+    background: var(--green);
+    color: #fff;
+    border-radius: 50%;
+    width: 24px; height: 24px;
+    line-height: 24px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin: 4px auto 0;
+  }
+  .day-col.is-qad-day .day-num { background: var(--orange); }
+  .day-col.is-today .day-num { box-shadow: 0 0 0 3px var(--green-light); }
+
+  .bada-list { padding: 6px 4px; flex: 1; display: flex; flex-direction: column; gap: 3px; }
+  .bada-chip {
+    background: var(--green-pale);
+    border-right: 3px solid var(--green);
+    border-radius: 0 5px 5px 0;
+    padding: 4px 6px;
+    font-size: 0.72rem;
+    color: #1b4332;
+    line-height: 1.3;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  body[dir="ltr"] .bada-chip {
+    border-right: none;
+    border-left: 3px solid var(--green);
+    border-radius: 5px 0 0 5px;
+  }
+  .bada-chip:hover { background: var(--green-card); }
+  .bada-chip.qad {
+    background: var(--orange-pale);
+    border-color: var(--orange);
+    color: #7c2d12;
+  }
+  .bada-chip.qad:hover { background: var(--orange-card); }
+  .bada-name { font-weight: 600; font-size: 0.73rem; }
+  .bada-time { font-size: 0.67rem; color: var(--text-muted); margin-top: 1px; }
+  .bada-chip.qad .bada-time { color: #92400e; }
+
+  /* DAY VIEW */
+  .day-view { margin: 16px; }
+  .day-view-header {
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+    color: #fff;
+    border-radius: 12px 12px 0 0;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .day-view-header.is-qad {
+    background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
+  }
+  .day-view-title { font-size: 1.5rem; font-weight: 700; }
+  .day-view-sub { font-size: 0.9rem; opacity: 0.85; margin-top: 4px; }
+  .day-view-cycle { font-size: 0.85rem; opacity: 0.8; }
+
+  .bada-table {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .bada-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr auto;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+    gap: 12px;
+    transition: background 0.15s;
+  }
+  .bada-row:last-child { border-bottom: none; }
+  .bada-row:hover { background: var(--green-pale); }
+  .bada-row.qad-row { background: var(--orange-pale); }
+  .bada-row.qad-row:hover { background: #ffd9b3; }
+  .bada-row-name { font-weight: 700; font-size: 1rem; color: var(--green); }
+  .bada-row.qad-row .bada-row-name { color: var(--orange); }
+  .bada-row-time { font-size: 0.88rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+  .time-arrow { color: var(--border); }
+  .bada-row-note { font-size: 0.8rem; color: var(--text-muted); background: var(--bg); padding: 3px 10px; border-radius: 20px; }
+  .bada-row.qad-row .bada-row-note { background: var(--orange-pale); color: var(--orange); }
+
+  .no-bada { padding: 32px; text-align: center; color: var(--text-muted); }
+
+  /* DOWNLOAD BTN */
+  .download-bar {
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+  }
+  .download-btn {
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 32px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 16px rgba(45,106,79,0.4);
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .download-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(45,106,79,0.5);
+  }
+  .download-btn:disabled { opacity: 0.7; cursor: wait; }
+  .download-btn svg { flex-shrink: 0; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .week-grid { grid-template-columns: repeat(2, 1fr); margin: 8px; }
+    header h1 { font-size: 1.7rem; }
+  }
+  @media (max-width: 480px) {
+    .week-grid { grid-template-columns: 1fr; margin: 6px; }
+  }
+
+  .cycle-progress {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    margin: 0 16px 8px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .progress-label { font-size: 0.85rem; color: var(--text-muted); min-width: 120px; }
+  .progress-track {
+    flex: 1;
+    min-width: 100px;
+    height: 10px;
+    background: var(--bg2);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green) 0%, var(--green-light) 100%);
+    border-radius: 99px;
+    transition: width 0.5s ease;
+  }
+  .progress-val { font-size: 0.85rem; font-weight: 700; color: var(--green); min-width: 50px; text-align: right; }
+
+  .hidden { display: none !important; }
+
+  /* LANGUAGE SWITCHER */
+  .lang-bar {
+    background: #1b4332;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    flex-wrap: wrap;
+  }
+  .lang-btn {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    border-radius: 16px;
+    padding: 3px 12px;
+    font-family: inherit;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .lang-btn.active { background: rgba(255,255,255,0.3); font-weight: 700; }
+  .lang-btn:hover { background: rgba(255,255,255,0.2); }
+
+  /* DEVICE TOGGLE */
+  .device-toggle-bar {
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    gap: 8px;
+  }
+  .device-btn {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 5px 14px;
+    font-family: inherit;
+    font-size: 0.82rem;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
+    color: var(--text-muted);
+    transition: all 0.2s;
+  }
+  .device-btn.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+  /* MOBILE LAYOUT */
+  body.mobile-view .week-grid { grid-template-columns: 1fr !important; }
+  body.mobile-view .nav-bar { flex-wrap: wrap; gap: 6px; }
+  body.mobile-view .week-title { min-width: unset; font-size: 0.9rem; }
+  body.mobile-view header h1 { font-size: 1.5rem; }
+
+  /* PAGE CREDIT FOOTER */
+  .page-credit {
+    text-align: center;
+    padding: 16px 20px 24px;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    background: var(--bg2);
+    font-weight: 600;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<!-- LANGUAGE BAR -->
+<div class="lang-bar">
+  <span style="color:rgba(255,255,255,0.6);font-size:0.78rem;margin-left:8px">اللغة / Language / زبان / ভাষা:</span>
+  <button class="lang-btn active" data-lang="ar" onclick="setLang('ar')">العربية</button>
+  <button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button>
+  <button class="lang-btn" data-lang="ur" onclick="setLang('ur')">اردو</button>
+  <button class="lang-btn" data-lang="bn" onclick="setLang('bn')">বাংলা</button>
+</div>
+
+<header>
+  <h1>🌊 فلج الواشحي</h1>
+  <p id="headerSubtitle">قرية افي • ولاية وادي المعاول • سلطنة عُمان</p>
+  <p id="docNote" style="font-size:0.85rem;opacity:0.95;margin-top:6px;font-weight:600;position:relative">بتوثيق من نبهان بن علي بن ناصر المعولي</p>
+  <div class="header-badges">
+    <span class="badge" id="badgeCycle">📅 دورة 56 يوماً</span>
+    <span class="badge" id="badgeDist">💧 توزيع البود</span>
+    <span class="badge" id="badgeCal">🕌 التقويم الهجري والميلادي</span>
+  </div>
+</header>
+
+<div class="today-banner" id="todayBanner">
+  <div>
+    <div class="today-info" id="todayInfo">جاري التحميل...</div>
+    <div class="today-detail" id="todayDetail"></div>
+  </div>
+  <div id="todayBadge" style="font-size:1.3rem"></div>
+</div>
+
+<!-- DEVICE TOGGLE -->
+<div class="device-toggle-bar">
+  <button class="device-btn active" id="btnDesktop" onclick="setDevice('desktop')">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+    <span>كمبيوتر</span>
+  </button>
+  <button class="device-btn" id="btnMobile" onclick="setDevice('mobile')">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1"/></svg>
+    <span>هاتف</span>
+  </button>
+</div>
+
+<div class="nav-bar">
+  <div class="nav-controls">
+    <button class="nav-btn" id="btnPrev" onclick="changeWeek(-1)">→ الأسبوع السابق</button>
+    <button class="nav-btn today-btn" id="btnTodayNav" onclick="goToToday()">اليوم</button>
+    <button class="nav-btn" id="btnNext" onclick="changeWeek(1)">← الأسبوع التالي</button>
+  </div>
+  <div class="week-title" id="weekTitle"></div>
+  <div class="view-toggle">
+    <button class="view-btn active" id="btnWeek" onclick="setView('week')">أسبوع</button>
+    <button class="view-btn" id="btnDay" onclick="setView('day')">يوم</button>
+  </div>
+</div>
+
+<div class="cycle-progress">
+  <span class="progress-label" id="progressLabel">تقدم الدورة (56 يوم):</span>
+  <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  <span class="progress-val" id="progressVal"></span>
+</div>
+
+<div class="legend">
+  <span class="legend-item"><span class="legend-dot orange"></span> <span id="legendQad">القعد (يوم الجمعة - 24 ساعة)</span></span>
+  <span class="legend-item"><span class="legend-dot green"></span> <span id="legendRest">بقية البود</span></span>
+</div>
+
+<div id="weekView"></div>
+<div id="dayView" class="hidden"></div>
+
+<div class="download-bar">
+  <button class="download-btn" id="downloadBtn" onclick="downloadWeekImage()">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    <span id="downloadLabel">تنزيل صورة الأسبوع</span>
+  </button>
+</div>
+
+<div class="page-credit" id="pageCredit">اعداد سيف بن نبهان المعولي – مراجعة فهم بن مالك المعولي</div>
+
+<script>
+/* ============================================================
+   فلج الواشحي – data + UI
+   Source of truth: تواقيت_بود_الواشحي_56_يوم.csv
+   Anchor: 1 May 2026 = Friday = Day 1 of cycle
+   ============================================================ */
+
+// ======== CYCLE DATA (from CSV) ========
+const CYCLE_DATA = {
+  1: { dayName: 'الجمعة', badas: [
+    { name: 'القعد', from: 'الأذان', to: 'الأذان', note: '24 ساعة - ملك عام بالمزايدة', isQad: true },
+  ]},
+  2: { dayName: 'السبت', badas: [
+    { name: 'الخمرة', from: 'الأذان', to: 'الصنهار' },
+    { name: 'ربع الخمرة', from: 'الصنهار', to: 'طياح الظلة' },
+    { name: 'المطيريح', from: 'طياح الظلة', to: 'ظل 16' },
+    { name: 'ماء المقصورة', from: 'ظل 16', to: 'سلم الشمس' },
+    { name: 'ربع الجوة', from: 'سلم الشمس', to: '12 ونصف' },
+    { name: 'ربع الصل', from: '12 ونصف', to: 'نصف الليل' },
+    { name: 'السحمة', from: 'نصف الليل', to: 'الأذان' },
+  ]},
+  3: { dayName: 'الأحد', badas: [
+    { name: 'ماء الضاحية', from: 'الأذان', to: 'الصنهار' },
+    { name: 'ربع المنقل', from: 'الصنهار', to: 'صنهار روحه (ظل)' },
+    { name: 'ثلاث الأحد', from: 'صنهار روحه', to: 'ظل 16' },
+    { name: 'ماء الأحد', from: 'ظل 16', to: 'سلم الشمس' },
+    { name: 'الصل أو الشراك', from: 'سلم الشمس', to: '12 ونصف عربي' },
+    { name: 'الجعجعة', from: 'احتراف جماعة', to: 'الأذان' },
+  ]},
+  4: { dayName: 'الاثنين', badas: [
+    { name: 'ربع العورا', from: 'الأذان', to: 'القروح (بعد أذان الفجر بربع)' },
+    { name: 'ماء المسجد', from: 'القروح', to: 'ظل 18' },
+    { name: 'الجفار', from: 'ظل 18', to: 'الصنهار' },
+    { name: 'ربع المزومل', from: 'الصنهار', to: 'طياح الظلة' },
+    { name: 'الخشبة', from: 'طياح الظلة', to: 'أذان المغرب' },
+    { name: 'المسلمة', from: 'أذان المغرب', to: 'الأذان' },
+  ]},
+  5: { dayName: 'الثلاثاء', badas: [
+    { name: 'ماء المدرسة', from: 'الأذان', to: 'طلع الشمس' },
+    { name: 'الصافية', from: 'طلع الشمس', to: 'ظل 22' },
+    { name: 'الصافية 2', from: 'ظل 22', to: 'الوقوف' },
+    { name: 'العشار', from: 'الوقوف', to: 'شمس أثر' },
+    { name: 'أثرين العشار', from: 'شمس أثر', to: 'أذان المغرب' },
+    { name: 'العورا', from: 'أذان المغرب', to: 'الأذان' },
+  ]},
+  6: { dayName: 'الأربعاء', badas: [
+    { name: 'المصرجية', from: 'الأذان', to: 'طياح الظلة' },
+    { name: 'ربع المنزف', from: 'طياح الظلة', to: 'سلم الشمس' },
+    { name: 'ماء الفلج', from: 'سلم الشمس', to: '12 ونصف' },
+    { name: 'القصراني', from: '12 ونصف', to: 'قبل الأذان بساعة' },
+  ]},
+  7: { dayName: 'الخميس', badas: [
+    { name: 'الدويرة', from: 'قبل الأذان بساعة', to: 'الصنهار' },
+    { name: 'مقفول القاضي', from: 'الصنهار', to: '9 ونصف' },
+    { name: 'ماء ناصر بن خميس', from: '9 ونصف', to: '11' },
+    { name: 'ماء سيف بن حمود', from: 'الساعة 11', to: 'احتراف جماعة' },
+    { name: 'القواسي الصغار', from: '12 ونصف', to: 'نصف الليل' },
+    { name: 'القواسي الكبار', from: 'نصف الليل', to: 'الأذان' },
+  ]},
+  8: { dayName: 'الجمعة', badas: [
+    { name: 'الخالص', from: 'الأذان', to: '10 ونصف عربي العصر' },
+    { name: 'القصدة', from: '10 ونصف عربي', to: 'نصف الليل' },
+    { name: 'الخن', from: 'نصف الليل', to: 'الأذان' },
+  ]},
+  9: { dayName: 'السبت', badas: [
+    { name: 'الفرهم', from: 'الأذان', to: 'الشمس أثر' },
+    { name: 'بادة فارس', from: 'الشمس أثر', to: 'الأذان' },
+  ]},
+  10: { dayName: 'الأحد', badas: [
+    { name: 'ربع البانيان', from: 'الأذان', to: 'طلع الشمس بأثر' },
+    { name: 'خمس الجوع', from: 'طلع الشمس بأثر', to: 'قضيان الربع' },
+    { name: 'الخبيبة', from: 'قضيان الربع', to: 'سلم الشمس' },
+    { name: 'العنانية الأولى', from: 'سلم الشمس', to: 'نصف الليل' },
+    { name: 'العنانية الثانية', from: 'نصف الليل', to: 'أذان الفجر' },
+  ]},
+  11: { dayName: 'الاثنين', badas: [
+    { name: 'ماء سالم بن سعيد', from: 'أذان الفجر', to: 'طلع الشمس' },
+    { name: 'الجويعدة', from: 'طلع الشمس', to: 'ظل 8' },
+    { name: 'ربع الحب', from: 'ظل 8', to: 'طياح الظلة' },
+    { name: 'جمار قضيب', from: 'طياح الظلة', to: 'أذان المغرب' },
+    { name: 'ربع الفدام', from: 'أذان المغرب', to: '12 ونصف' },
+    { name: 'البيدارة', from: '12 ونصف', to: 'نصف الليل' },
+    { name: 'الغتلين', from: 'نصف الليل', to: 'الأذان' },
+  ]},
+  12: { dayName: 'الثلاثاء', badas: [
+    { name: 'الوقفان', from: 'الأذان', to: 'الصنهار' },
+    { name: 'ماء الوصية', from: 'الصنهار', to: 'آخر نهار الربع' },
+    { name: 'عزر هلال بن ناصر والسركال', from: 'آخر نهار الربع', to: 'نصف الليل' },
+    { name: 'عزر هلال بن أحمد', from: 'نصف الليل', to: 'ظل 17 صباح الأربعاء' },
+  ]},
+  13: { dayName: 'الأربعاء', badas: [
+    { name: 'الجمار', from: 'ظل 17 الصبح', to: 'سلم الشمس' },
+    { name: 'الشايع', from: 'سلم الشمس', to: 'نصف الليل' },
+    { name: 'الجوازي', from: 'نصف الليل', to: 'الأذان' },
+  ]},
+  14: { dayName: 'الخميس', badas: [
+    { name: 'مقفول نزوى', from: 'الأذان', to: 'الأذان', note: '24 ساعة - شايعه لشراباتها مع أصحاب الفضله' },
+  ]},
+  15: { dayName: 'الجمعة', badas: [
+    { name: 'القعد', from: 'الأذان', to: 'الأذان', note: '24 ساعة - ملك عام بالمزايدة', isQad: true },
+  ]},
+  16: { dayName: 'السبت', badas: [
+    { name: 'السحمة', from: 'الأذان', to: 'الصنهار' },
+    { name: 'ربع الصل', from: 'الصنهار', to: 'طياح الظلة' },
+    { name: 'ماء الجوه', from: 'طياح الظلة', to: 'ظل 7' },
+    { name: 'ما المقصورة', from: 'ظل 7', to: 'ظل 16' },
+    { name: 'المطيريح', from: 'ظل 16', to: 'أذان المغرب' },
+    { name: 'ربع الخمرة', from: 'أذان المغرب', to: 'نصف الليل' },
+    { name: 'الخمرة', from: 'نصف الليل', to: 'الأذان' },
+  ]},
+  17: { dayName: 'الأحد', badas: [
+    { name: 'ربع المنقل', from: 'الأذان', to: 'طلع الشمس' },
+    { name: 'ماء الأحد', from: 'طلع الشمس', to: 'ظل 16' },
+    { name: 'ثلاث الأحد', from: 'ظل 16', to: 'الصنهار' },
+    { name: 'ما الضاحية', from: 'الصنهار', to: 'الساعة 11' },
+    { name: 'الجفار', from: 'الساعة 11', to: 'الأذان' },
+  ]},
+  18: { dayName: 'الاثنين', badas: [
+    { name: 'بادة فارس', from: 'الأذان', to: 'الصنهار' },
+    { name: 'ما الصخيبية', from: 'الصنهار', to: 'طياح الظلة' },
+    { name: 'الخشبة', from: 'طياح الظلة', to: '12 ونصف عربي' },
+    { name: 'ربع الجمار', from: '12 ونصف', to: 'نصف الليل' },
+    { name: 'المصرجية', from: 'نصف الليل', to: 'الأذان' },
+  ]},
+  19: { dayName: 'الثلاثاء', badas: [
+    { name: 'ما المدرسة', from: 'الأذان', to: 'طلع الشمس' },
+    { name: 'ما الصافية', from: 'طلع الشمس', to: 'ظل 22' },
+    { name: 'ما سيف محمد', from: 'ظل 22', to: 'ظل 32' },
+    { name: 'ما سليمان ناصر', from: 'ظل 32', to: 'الوقوف' },
+    { name: 'العشار', from: 'الوقوف', to: 'الساعة 11 من المخيل' },
+    { name: 'أثرين العشار', from: 'الساعة 11', to: 'أذان المغرب' },
+    { name: 'العورا', from: 'أذان المغرب', to: 'الأذان' },
+  ]},
+  20: { dayName: 'الأربعاء', badas: [
+    { name: 'المسلمة', from: 'الأذان', to: 'الوقوف' },
+    { name: 'ربع الفدام', from: 'الوقوف', to: 'ظل 9' },
+    { name: 'ربع الخبيبة', from: 'ظل 9', to: 'سلم الشمس' },
+    { name: 'ماء الفلج', from: 'سلم الشمس', to: '12 ونصف' },
+    { name: 'القصراني', from: '12 ونصف', to: 'الأذان' },
+  ]},
+  21: { dayName: 'الخميس', badas: [
+    { name: 'القواسي الصغار', from: 'الأذان', to: 'ظل 16' },
+    { name: 'القواسي الكبار', from: 'ظل 16', to: 'طياح الظلة' },
+    { name: 'مقصورة السوق', from: 'طياح الظلة', to: 'الى 7 ونصف عربي' },
+    { name: 'ما ناصر بن خميس', from: 'من 7 ونصف ع', to: '9 ونصف' },
+    { name: 'مقفول القاضي', from: 'من 9 ونصف', to: 'نصف الليل' },
+    { name: 'الدويرة', from: 'من نصف الليل', to: 'قبل الأذان بساعة' },
+  ]},
+  22: { dayName: 'الجمعة', badas: [
+    { name: 'القصدة', from: 'الأذان', to: 'الصنهار' },
+    { name: 'الجوازي', from: 'الصنهار', to: 'الشمس أثر' },
+    { name: 'الخالص', from: 'الشمس أثر', to: 'الأذان' },
+  ]},
+  23: { dayName: 'السبت', badas: [
+    { name: 'بادة فارس', from: 'الأذان', to: 'الشمس أثر' },
+    { name: 'الفرهم', from: 'الشمس أثر', to: 'الأذان' },
+  ]},
+  24: { dayName: 'الأحد', badas: [
+    { name: 'عنانية هلال بن ناصر', from: 'الأذان', to: 'الصنهار' },
+    { name: 'عنانية علي بن حمود', from: 'الصنهار', to: 'الشمس أثر' },
+    { name: 'الخبيبة', from: 'الشمس أثر', to: 'الأذان' },
+  ]},
+  25: { dayName: 'الاثنين', badas: [
+    { name: 'الغتلين', from: 'الأذان', to: 'الصنهار' },
+    { name: 'ربع الفدام', from: 'الصنهار', to: 'طياح الظلة' },
+    { name: 'الشراك', from: 'طياح الظلة', to: 'ظل 12' },
+    { name: 'البيدارة', from: 'ظل 12', to: 'سلم الشمس' },
+    { name: 'جمار قضيب', from: 'سلم الشمس', to: '12 ونصف عربي' },
+    { name: 'ربع الحب', from: 'احتراف جماعة', to: 'نصف الليل' },
+    { name: 'الجويعدة', from: 'نصف الليل', to: 'آخر الليل الربع' },
+  ]},
+  26: { dayName: 'الثلاثاء', badas: [
+    { name: 'عزر هلال بن ناصر والسركال', from: 'آخر ليل الربع', to: 'قضيان الربع' },
+    { name: 'عزر هلال بن أحمد', from: 'قضيان الربع', to: 'الساعة 11 العصر' },
+    { name: 'ماء المسجد عند مسجد زيانه', from: 'الساعة 11 العصر', to: 'سلم الشمس' },
+    { name: 'الوقفان', from: 'سلم الشمس', to: 'نصف الليل' },
+    { name: 'ماء الوصية', from: 'نصف الليل', to: 'الأذان' },
+  ]},
+  27: { dayName: 'الأربعاء', badas: [
+    { name: 'الخن', from: 'الأذان', to: 'الصنهار' },
+    { name: 'الشايع', from: 'الصنهار', to: 'سلم الشمس' },
+    { name: 'الجمار', from: 'سلم الشمس', to: 'الأذان' },
+  ]},
+  28: { dayName: 'الخميس', badas: [
+    { name: 'مقفول نزوى', from: 'الأذان', to: 'الأذان', note: '24 ساعة - شايعه لشراباتها مع أصحاب الفضله' },
+  ]},
+  29: { dayName: 'الجمعة', badas: [
+    { name: 'القعد', from: 'الأذان', to: 'الأذان', note: '24 ساعة - ملك عام بالمزايدة', isQad: true },
+  ]},
+  30: { dayName: 'السبت', badas: [
+    { name: 'الخمرة', from: 'الأذان', to: 'الصنهار' },
+    { name: 'ربع الخمرة', from: 'الصنهار', to: 'طياح الظلة' },
+    { name: 'المطيريح', from: 'طياح الظلة', to: 'ظل 16' },
+    { name: 'ماء المقصورة', from: 'ظل 16', to: 'سلم الشمس' },
+    { name: 'ربع الجوة', from: 'سلم الشمس', to: '12 ونصف' },
+    { name: 'ربع الصل', from: '12 ونصف', to: 'نصف الليل' },
+    { name: 'السحمة', from: 'نصف الليل', to: 'الأذان' },
+  ]},
+  31: { dayName: 'الأحد', badas: [
+    { name: 'ماء الضاحية', from: 'الأذان', to: 'الصنهار' },
+    { name: 'ربع المنقل', from: 'الصنهار', to: 'صنهار روحه ( ظل )' },
+    { name: 'ثلاث الأحد', from: 'صنهار روحه', to: 'ظل 16' },
+    { name: 'ماء الأحد', from: 'ظل 16', to: 'سلم الشمس' },
+    { name: 'الصل او الشراك', from: 'سلم الشمس', to: '12 ونصف عربي' },
+    { name: 'الجعجعة', from: 'احتراف جماعة', to: 'الأذان' },
+  ]},
+  32: { dayName: 'الاثنين', badas: [
+    { name: 'الجفار', from: 'الأذان', to: 'الصنهار' },
+    { name: 'ربع المزومل', from: 'الصنهار', to: 'طياح الظلة' },
+    { name: 'الخشبة', from: 'طياح الظلة', to: 'أذان المغرب' },
+    { name: 'المسلمة', from: 'اذان المغرب', to: 'اذان الواشحي' },
+  ]},
+  33: { dayName: 'الثلاثاء', badas: [
+    { name: 'ماء المدرسة', from: 'الأذان', to: 'طلع الشمس' },
+    { name: 'الصافية', from: 'طلع الشمس', to: 'ظل 22' },
+    { name: 'الصافية 2', from: 'ظل 22', to: 'الوقوف' },
+    { name: 'العشار', from: 'الوقوف', to: 'شمس أثر' },
+    { name: 'اثرين العشار', from: 'شمس اثر', to: 'اذان المغرب' },
+    { name: 'العورا', from: 'اذان المغرب', to: 'الاذان' },
+  ]},
+  34: { dayName: 'الأربعاء', badas: [
+    { name: 'ربع المالكية', from: 'الأذان', to: 'ظل 16' },
+    { name: 'القصراني', from: 'ظل 16', to: 'طياح الظلة' },
+    { name: 'ربع المنزف', from: 'طياح الظلة', to: '11 ونصف' },
+    { name: 'ربع الفدام', from: '11 ونصف', to: '12 ونصف' },
+    { name: 'المصرجية', from: '12 ونصف', to: 'قبل الاذان بساعه' },
+  ]},
+  35: { dayName: 'الخميس', badas: [
+    { name: 'الدويرة', from: 'قبل الأذان بساعه', to: 'الصنهار' },
+    { name: 'مقفول القاضي', from: 'الصنهار', to: '9 ونصف' },
+    { name: 'ماء ناصر بن خميس', from: '9 ونصف', to: '11' },
+    { name: 'ماء سيف بن حمود', from: 'الساعه 11', to: 'احتراف جماعه' },
+    { name: 'القواسي الصغار', from: '12 ونصف', to: 'نصف الليل' },
+    { name: 'القواسي الكبار', from: 'نصف الليل', to: 'الاذان' },
+  ]},
+  36: { dayName: 'الجمعة', badas: [
+    { name: 'الخالص', from: 'الأذان', to: '10 ونصف عربي العصر' },
+    { name: 'الجوازي', from: '10 ونصف', to: 'نصف الليل' },
+    { name: 'الخن', from: 'نصف الليل', to: 'الأذان' },
+  ]},
+  37: { dayName: 'السبت', badas: [
+    { name: 'الفرهم', from: 'الأذان', to: 'الشمس اثر' },
+    { name: 'بادة فارس', from: 'الشمس اثر', to: 'الأذان' },
+  ]},
+  38: { dayName: 'الأحد', badas: [
+    { name: 'ربع البانيان', from: 'الأذان', to: 'طلع الشمس بأثر' },
+    { name: 'خمس الجوع', from: 'طلع الشمس بأثر', to: 'قضيان الربع' },
+    { name: 'الخبيبه', from: 'قضيان الربع', to: 'سلم الشمس' },
+    { name: 'العنانية الأولى', from: 'سلم الشمس', to: 'نصف الليل' },
+    { name: 'العنانية الثانية', from: 'نصف الليل', to: 'أذان الفجر' },
+  ]},
+  39: { dayName: 'الاثنين', badas: [
+    { name: 'ماء سالم بن سعيد', from: 'أذان الفجر', to: 'طلع الشمس' },
+    { name: 'الجويعده', from: 'طلع الشمس', to: 'ظل 8' },
+    { name: 'جمار قضيب', from: 'ظل 8', to: 'طياح الظلة' },
+    { name: 'ربع الحب', from: 'طياح الظلة', to: 'أذان المغرب' },
+    { name: 'ربع الفدام', from: 'أذان المغرب', to: '12 ونصف' },
+    { name: 'الشراك', from: '12 ونصف', to: 'نصف الليل' },
+    { name: 'الغتلين', from: 'نصف الليل', to: 'الأذان' },
+  ]},
+  40: { dayName: 'الثلاثاء', badas: [
+    { name: 'الوقفان', from: 'الأذان', to: 'الصنهار' },
+    { name: 'ماء الوصية', from: 'الصنهار', to: 'اخر نهار الربع' },
+    { name: 'عزر هلال بن ناصر والسركال', from: 'اخر نهار الربع', to: 'نصف الليل' },
+    { name: 'عزر هلال بن أحمد', from: 'نصف الليل', to: 'ظل 17 صباح الاربعاء' },
+  ]},
+  41: { dayName: 'الأربعاء', badas: [
+    { name: 'الجمار', from: 'ظل 17 الصبح', to: 'سلم الشمس' },
+    { name: 'الخن', from: 'سلم الشمس', to: 'نصف الليل' },
+    { name: 'الشايع', from: 'نصف الليل', to: 'الأذان' },
+  ]},
+  42: { dayName: 'الخميس', badas: [
+    { name: 'مقفول نزوى', from: 'الأذان', to: 'الأذان', note: '24 ساعة - شايعه لشراباتها مع أصحاب الفضله' },
+  ]},
+  43: { dayName: 'الجمعة', badas: [
+    { name: 'القعد', from: 'الأذان', to: 'الأذان', note: '24 ساعة - ملك عام بالمزايدة', isQad: true },
+  ]},
+  44: { dayName: 'السبت', badas: [
+    { name: 'السحمة', from: 'الأذان', to: 'الصنهار' },
+    { name: 'ربع الصل', from: 'الصنهار', to: 'طياح الظلة' },
+    { name: 'ماء الجوه', from: 'طياح الظلة', to: 'ظل 7' },
+    { name: 'ما المقصورة', from: 'ظل 7', to: 'ظل 16' },
+    { name: 'المطيريح', from: 'ظل 16', to: 'لذان المغرب' },
+    { name: 'ربع الخمرة', from: 'اذان المغرب', to: 'نصف الليل' },
+    { name: 'الخمرة', from: 'نصف الليل', to: 'الاذان' },
+  ]},
+  45: { dayName: 'الأحد', badas: [
+    { name: 'ربع المنقل', from: 'الاذان', to: 'طلع الشمس' },
+    { name: 'ماء الاحد', from: 'طلع الشمس', to: 'ظل 16' },
+    { name: 'ثلاث الاحد', from: 'ظل 16', to: 'الصنهار' },
+    { name: 'ما الضاحية', from: 'الصنهار', to: 'الساعه 11' },
+    { name: 'اثرين العورا', from: 'الساعه 11', to: 'قيام سنة المغرب' },
+    { name: 'الجفار', from: 'قيام سنة المغرب', to: 'الاذان' },
+  ]},
+  46: { dayName: 'الاثنين', badas: [
+    { name: 'الجعجعة', from: 'الاذان', to: 'الصنهار' },
+    { name: 'ما الصخيبية', from: 'الصنهار', to: 'طياح الظلة' },
+    { name: 'الخشبة', from: 'طياح الظلة', to: '12 ونصف عربي' },
+    { name: 'القصراني', from: '12 ونصف', to: 'الاذان' },
+  ]},
+  47: { dayName: 'الثلاثاء', badas: [
+    { name: 'ما المدرسة', from: 'الاذان', to: 'طلع الشمس' },
+    { name: 'ما الصافية', from: 'طلع الشمس', to: 'ظل 22' },
+    { name: 'ما سيف محمد', from: 'ظل 22', to: 'ظل 32' },
+    { name: 'ما سليمان ناصر', from: 'ظل 32', to: 'الوقوف' },
+    { name: 'العشار', from: 'الوقوف', to: 'الساعه 11' },
+    { name: 'اثرين العشار', from: 'الساعه 11', to: 'اذان المغرب' },
+    { name: 'العورا', from: 'اذان المغرب', to: 'الاذان' },
+  ]},
+  48: { dayName: 'الأربعاء', badas: [
+    { name: 'ربع الخبيبه', from: 'الاذان', to: 'القروح قبل اذان الفجر بربع ساعه' },
+    { name: 'ربع الفدام', from: 'القروح', to: 'ظل 15' },
+    { name: 'المسلمة', from: 'ظل 15', to: 'احتراف جماعه' },
+    { name: 'المصرجية', from: '12 ونصف', to: 'الاذان' },
+  ]},
+  49: { dayName: 'الخميس', badas: [
+    { name: 'القواسي الصغار', from: 'الاذان', to: 'ظل 16' },
+    { name: 'القواسي الكبار', from: 'ظل 16', to: 'طياح الظلة' },
+    { name: 'مقصورة السوق', from: 'طياح الظل', to: 'الى 7 ونصف عربي' },
+    { name: 'ما ناصر بن خميس', from: 'من 7 ونصف ع', to: '9 ونصف' },
+    { name: 'مقفول القاضي', from: 'من 9 ونصف', to: 'نصف الليل' },
+    { name: 'الدويرة', from: 'من نصف الليل', to: 'قبل الاذان بساعه' },
+  ]},
+  50: { dayName: 'الجمعة', badas: [
+    { name: 'الجوازي', from: 'الأذان', to: 'الصنهار' },
+    { name: 'القصدة', from: 'الصنهار', to: 'الشمس اثر' },
+    { name: 'الخالص', from: 'الشمس اثر', to: 'الأذان' },
+  ]},
+  51: { dayName: 'السبت', badas: [
+    { name: 'بادة فارس', from: 'الأذان', to: 'الشمس اثر' },
+    { name: 'الفرهم', from: 'الشمس اثر', to: 'الأذان' },
+  ]},
+  52: { dayName: 'الأحد', badas: [
+    { name: 'عنانية هلال بن ناصر', from: 'الاذان', to: 'الصنهار' },
+    { name: 'عنانية علي بن حمود', from: 'الصنهار', to: 'سلم الشمس' },
+    { name: 'ماء الصخيبية', from: 'سلم الشمس', to: 'احتراف جماعه' },
+    { name: 'الخبيبة', from: '12 ونصف', to: 'الاذان' },
+  ]},
+  53: { dayName: 'الاثنين', badas: [
+    { name: 'الغلين', from: 'الاذان', to: 'الصنهار' },
+    { name: 'ربع الفدام', from: 'الصنهار', to: 'طياح الظلة' },
+    { name: 'البيدارة', from: 'طياح الظلة', to: 'ظل 12' },
+    { name: 'الشراك', from: 'ظل 12', to: 'سلم الشمس' },
+    { name: 'ربع الحب', from: 'سلم الشمس', to: '12 ونصف عربي' },
+    { name: 'جمار قضيب', from: 'احتراف جماعه', to: 'نصف الليل' },
+    { name: 'الجويعده', from: 'نصف الليل', to: 'اخر الليل الربع' },
+  ]},
+  54: { dayName: 'الثلاثاء', badas: [
+    { name: 'عزر هلال بن ناصر والسركال', from: 'اخر ليل الربع', to: 'قضيان الربع' },
+    { name: 'عزر هلال بن احمد', from: 'قضيان الربع', to: 'الساعه 11 العصر' },
+    { name: 'ماء المسجد عند مسجد زيانه', from: 'الساعه 11 العصر', to: 'سلم الشمس' },
+    { name: 'الوقفان', from: 'سلم الشمس', to: 'نصف الليل' },
+    { name: 'ماء الوصية', from: 'نصف الليل', to: 'الاذان' },
+  ]},
+  55: { dayName: 'الأربعاء', badas: [
+    { name: 'الشايع', from: 'الاذان', to: 'الصنهار' },
+    { name: 'الخن', from: 'الصنهار', to: 'سلم الشمس' },
+    { name: 'الجمار', from: 'سلم الشمس', to: 'الاذان' },
+  ]},
+  56: { dayName: 'الخميس', badas: [
+    { name: 'مقفول نزوى', from: 'الأذان', to: 'الأذان', note: '24 ساعة - شايعه لشراباتها مع أصحاب الفضله' },
+  ]},
+};
+
+// ======== LANGUAGE LABELS ========
+const LANG_NAMES = {
+  ar: {
+    days: ['الجمعة','السبت','الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس'],
+    today: 'اليوم', cycleDay: 'اليوم', fromCycle: 'من الدورة',
+    firstBada: 'البادة الأولى',
+    qadLabel: '🟠 يوم القعد', greenLabel: '🟢 يوم بود',
+    prevWeek: '→ الأسبوع السابق', nextWeek: '← الأسبوع التالي',
+    todayBtn: 'اليوم', weekBtn: 'أسبوع', dayBtn: 'يوم',
+    cycle56: 'تقدم الدورة (56 يوم):',
+    desktop: 'كمبيوتر', mobile: 'هاتف',
+    download: 'تنزيل صورة الأسبوع', downloading: 'جاري إنشاء الصورة...',
+    badgeCycle: '📅 دورة 56 يوماً', badgeDist: '💧 توزيع البود',
+    badgeCal: '🕌 التقويم الهجري والميلادي',
+    legendQad: 'القعد (يوم الجمعة - 24 ساعة)', legendRest: 'بقية البود',
+    docNote: 'بتوثيق من نبهان بن علي بن ناصر المعولي',
+    subtitle: 'قرية افي • ولاية وادي المعاول • سلطنة عُمان',
+    qadDayLabel: '🟠 يوم القعد', todayBadasLabel: '🟢 بود اليوم',
+    dayOfCycle: 'اليوم', fromCycleShort: 'من الدورة',
+    noData: 'لا توجد بيانات لهذا اليوم',
+    pageCredit: 'اعداد سيف بن نبهان المعولي – مراجعة فهم بن مالك المعولي',
+    locale: 'ar-EG', dir: 'rtl', timeArrowFwd: '←'
+  },
+  en: {
+    days: ['Friday','Saturday','Sunday','Monday','Tuesday','Wednesday','Thursday'],
+    today: 'Today', cycleDay: 'Day', fromCycle: 'of cycle',
+    firstBada: 'First Bāda',
+    qadLabel: "🟠 Al-Qa'd Day", greenLabel: '🟢 Bood Day',
+    prevWeek: '← Previous Week', nextWeek: 'Next Week →',
+    todayBtn: 'Today', weekBtn: 'Week', dayBtn: 'Day',
+    cycle56: 'Cycle Progress (56 days):',
+    desktop: 'Desktop', mobile: 'Mobile',
+    download: 'Download Week Image', downloading: 'Generating image...',
+    badgeCycle: '📅 56-Day Cycle', badgeDist: '💧 Bood Distribution',
+    badgeCal: '🕌 Hijri & Gregorian Calendar',
+    legendQad: "Al-Qa'd (Friday - 24 hours)", legendRest: 'Other Bood',
+    docNote: 'Documented by Nabhan bin Ali bin Nasir Al-Maawali',
+    subtitle: 'Afi Village • Wadi Al-Maawil • Sultanate of Oman',
+    qadDayLabel: "🟠 Al-Qa'd Day", todayBadasLabel: "🟢 Today's Bood",
+    dayOfCycle: 'Day', fromCycleShort: 'of cycle',
+    noData: 'No data for this day',
+    pageCredit: 'Prepared by Saif bin Nabhan Al-Maawali – Reviewed by Fahm bin Malik Al-Maawali',
+    locale: 'en-GB', dir: 'ltr', timeArrowFwd: '→'
+  },
+  ur: {
+    days: ['جمعہ','ہفتہ','اتوار','پیر','منگل','بدھ','جمعرات'],
+    today: 'آج', cycleDay: 'دن', fromCycle: 'سائیکل میں سے',
+    firstBada: 'پہلی بادہ',
+    qadLabel: '🟠 القعد کا دن', greenLabel: '🟢 بود کا دن',
+    prevWeek: '→ پچھلا ہفتہ', nextWeek: '← اگلا ہفتہ',
+    todayBtn: 'آج', weekBtn: 'ہفتہ', dayBtn: 'دن',
+    cycle56: 'سائیکل کی پیش رفت (56 دن):',
+    desktop: 'کمپیوٹر', mobile: 'موبائل',
+    download: 'ہفتے کی تصویر ڈاؤن لوڈ کریں', downloading: 'تصویر بن رہی ہے...',
+    badgeCycle: '📅 56 دن کا سائیکل', badgeDist: '💧 بود کی تقسیم',
+    badgeCal: '🕌 ہجری اور عیسوی کیلنڈر',
+    legendQad: 'القعد (جمعہ - 24 گھنٹے)', legendRest: 'باقی بود',
+    docNote: 'نبہان بن علی بن ناصر المعولی کی توثیق سے',
+    subtitle: 'قریہ آفی • ولایت وادی المعاول • سلطنت عمان',
+    qadDayLabel: '🟠 القعد کا دن', todayBadasLabel: '🟢 آج کے بود',
+    dayOfCycle: 'دن', fromCycleShort: 'سائیکل میں سے',
+    noData: 'اس دن کے لیے کوئی ڈیٹا نہیں',
+    pageCredit: 'تیاری: سیف بن نبہان المعولی – نظرثانی: فہم بن مالک المعولی',
+    locale: 'ur-PK', dir: 'rtl', timeArrowFwd: '←'
+  },
+  bn: {
+    days: ['শুক্রবার','শনিবার','রবিবার','সোমবার','মঙ্গলবার','বুধবার','বৃহস্পতিবার'],
+    today: 'আজ', cycleDay: 'দিন', fromCycle: 'চক্রের',
+    firstBada: 'প্রথম বাদা',
+    qadLabel: '🟠 আল-কাদ দিন', greenLabel: '🟢 বুদ দিন',
+    prevWeek: '← আগের সপ্তাহ', nextWeek: 'পরের সপ্তাহ →',
+    todayBtn: 'আজ', weekBtn: 'সপ্তাহ', dayBtn: 'দিন',
+    cycle56: 'চক্রের অগ্রগতি (৫৬ দিন):',
+    desktop: 'ডেস্কটপ', mobile: 'মোবাইল',
+    download: 'সপ্তাহের ছবি ডাউনলোড', downloading: 'ছবি তৈরি হচ্ছে...',
+    badgeCycle: '📅 ৫৬ দিনের চক্র', badgeDist: '💧 বুদ বণ্টন',
+    badgeCal: '🕌 হিজরি ও গ্রেগরিয়ান ক্যালেন্ডার',
+    legendQad: 'আল-কাদ (শুক্রবার - ২৪ ঘণ্টা)', legendRest: 'অন্যান্য বুদ',
+    docNote: 'নাবহান বিন আলি বিন নাসির আল-মাওয়ালি কর্তৃক নথিভুক্ত',
+    subtitle: 'আফি গ্রাম • ওয়াদি আল-মাওয়িল • ওমান সালতানাত',
+    qadDayLabel: '🟠 আল-কাদ দিন', todayBadasLabel: '🟢 আজকের বুদ',
+    dayOfCycle: 'দিন', fromCycleShort: 'চক্রের',
+    noData: 'এই দিনের জন্য কোনো তথ্য নেই',
+    pageCredit: 'প্রস্তুতকারক: সাইফ বিন নাবহান আল-মাওয়ালি – পর্যালোচক: ফাহম বিন মালিক আল-মাওয়ালি',
+    locale: 'bn-BD', dir: 'ltr', timeArrowFwd: '→'
+  }
+};
+
+// ======== TRANSLITERATION TABLE ========
+const TR = {
+  'القعد': { en: 'Al-Qa\'d', ur: 'القعد', bn: 'আল-কাদ' },
+  'الخمرة': { en: 'Al-Khamra', ur: 'الخمرہ', bn: 'আল-খামরা' },
+  'ربع الخمرة': { en: 'Rub\' Al-Khamra', ur: 'ربع الخمرہ', bn: 'রুব\' আল-খামরা' },
+  'المطيريح': { en: 'Al-Mtayrīh', ur: 'المطیریح', bn: 'আল-মুতাইরিহ' },
+  'ماء المقصورة': { en: 'Mā\' Al-Maqsūra', ur: 'ماء المقصورہ', bn: 'মা\' আল-মাকসুরা' },
+  'ما المقصورة': { en: 'Mā\' Al-Maqsūra', ur: 'ما المقصورہ', bn: 'মা\' আল-মাকসুরা' },
+  'ربع الجوة': { en: 'Rub\' Al-Jawa', ur: 'ربع الجوہ', bn: 'রুব\' আল-জাওয়া' },
+  'ماء الجوه': { en: 'Mā\' Al-Jawa', ur: 'ماء الجوہ', bn: 'মা\' আল-জাওয়া' },
+  'ربع الصل': { en: 'Rub\' As-Sall', ur: 'ربع الصل', bn: 'রুব\' আস-সাল' },
+  'السحمة': { en: 'As-Sahma', ur: 'السحمہ', bn: 'আস-সাহমা' },
+  'ماء الضاحية': { en: 'Mā\' Ad-Dāhiya', ur: 'ماء الضاحیہ', bn: 'মা\' আদ-দাহিয়া' },
+  'ما الضاحية': { en: 'Mā\' Ad-Dāhiya', ur: 'ما الضاحیہ', bn: 'মা\' আদ-দাহিয়া' },
+  'ربع المنقل': { en: 'Rub\' Al-Manqal', ur: 'ربع المنقل', bn: 'রুব\' আল-মানকাল' },
+  'ثلاث الأحد': { en: 'Thalāth Al-Ahad', ur: 'ثلاث الأحد', bn: 'ছালাছ আল-আহাদ' },
+  'ثلاث الاحد': { en: 'Thalāth Al-Ahad', ur: 'ثلاث الاحد', bn: 'ছালাছ আল-আহাদ' },
+  'ماء الأحد': { en: 'Mā\' Al-Ahad', ur: 'ماء الأحد', bn: 'মা\' আল-আহাদ' },
+  'ماء الاحد': { en: 'Mā\' Al-Ahad', ur: 'ماء الاحد', bn: 'মা\' আল-আহাদ' },
+  'الصل أو الشراك': { en: 'As-Sall aw Ash-Shirāk', ur: 'الصل یا الشراک', bn: 'আস-সাল বা আশ-শিরাক' },
+  'الصل او الشراك': { en: 'As-Sall aw Ash-Shirāk', ur: 'الصل یا الشراک', bn: 'আস-সাল বা আশ-শিরাক' },
+  'الجعجعة': { en: 'Al-Ja\'ja\'a', ur: 'الجعجعہ', bn: 'আল-জা\'জা\'আ' },
+  'ربع العورا': { en: 'Rub\' Al-\'Awra', ur: 'ربع العورا', bn: 'রুব\' আল-আওরা' },
+  'ماء المسجد': { en: 'Mā\' Al-Masjid', ur: 'ماء المسجد', bn: 'মা\' আল-মাসজিদ' },
+  'ماء المسجد عند مسجد زيانه': { en: 'Mā\' Al-Masjid (at Zayyāna)', ur: 'ماء المسجد (زیانہ)', bn: 'মা\' আল-মাসজিদ (যিয়ানা)' },
+  'الجفار': { en: 'Al-Jafār', ur: 'الجفار', bn: 'আল-জাফার' },
+  'ربع المزومل': { en: 'Rub\' Al-Muzawmal', ur: 'ربع المزومل', bn: 'রুব\' আল-মুযাওমাল' },
+  'الخشبة': { en: 'Al-Khashaba', ur: 'الخشبہ', bn: 'আল-খাশাবা' },
+  'المسلمة': { en: 'Al-Musallama', ur: 'المسلمہ', bn: 'আল-মুসাল্লামা' },
+  'ماء المدرسة': { en: 'Mā\' Al-Madrasa', ur: 'ماء المدرسہ', bn: 'মা\' আল-মাদরাসা' },
+  'ما المدرسة': { en: 'Mā\' Al-Madrasa', ur: 'ما المدرسہ', bn: 'মা\' আল-মাদরাসা' },
+  'الصافية': { en: 'As-Sāfiya', ur: 'الصافیہ', bn: 'আস-সাফিয়া' },
+  'الصافية 2': { en: 'As-Sāfiya 2', ur: 'الصافیہ 2', bn: 'আস-সাফিয়া ২' },
+  'ما الصافية': { en: 'Mā\' As-Sāfiya', ur: 'ما الصافیہ', bn: 'মা\' আস-সাফিয়া' },
+  'ما سيف محمد': { en: 'Mā\' Sayf Muhammad', ur: 'ما سیف محمد', bn: 'মা\' সাইফ মুহাম্মাদ' },
+  'ما سليمان ناصر': { en: 'Mā\' Sulaymān Nāsir', ur: 'ما سلیمان ناصر', bn: 'মা\' সুলায়মান নাসির' },
+  'العشار': { en: 'Al-\'Ushār', ur: 'العشار', bn: 'আল-উশার' },
+  'اثرين العشار': { en: 'Athrayn Al-\'Ushār', ur: 'اثرین العشار', bn: 'আছরাইন আল-উশার' },
+  'أثرين العشار': { en: 'Athrayn Al-\'Ushār', ur: 'أثرین العشار', bn: 'আছরাইন আল-উশার' },
+  'العورا': { en: 'Al-\'Awra', ur: 'العورا', bn: 'আল-আওরা' },
+  'اثرين العورا': { en: 'Athrayn Al-\'Awra', ur: 'اثرین العورا', bn: 'আছরাইন আল-আওরা' },
+  'المصرجية': { en: 'Al-Misrijiyya', ur: 'المصرجیہ', bn: 'আল-মিসরিজিয়্যা' },
+  'ربع المنزف': { en: 'Rub\' Al-Munzaf', ur: 'ربع المنزف', bn: 'রুব\' আল-মুনযাফ' },
+  'ماء الفلج': { en: 'Mā\' Al-Falaj', ur: 'ماء الفلج', bn: 'মা\' আল-ফালাজ' },
+  'القصراني': { en: 'Al-Qisrāni', ur: 'القصرانی', bn: 'আল-কিসরানি' },
+  'الدويرة': { en: 'Ad-Duwayra', ur: 'الدویرہ', bn: 'আদ-দুওয়াইরা' },
+  'مقفول القاضي': { en: 'Maqfūl Al-Qādi', ur: 'مقفول القاضی', bn: 'মাকফুল আল-কাদি' },
+  'ماء ناصر بن خميس': { en: 'Mā\' Nāsir bin Khamīs', ur: 'ماء ناصر بن خمیس', bn: 'মা\' নাসির বিন খামিস' },
+  'ما ناصر بن خميس': { en: 'Mā\' Nāsir bin Khamīs', ur: 'ما ناصر بن خمیس', bn: 'মা\' নাসির বিন খামিস' },
+  'ماء سيف بن حمود': { en: 'Mā\' Sayf bin Hammūd', ur: 'ماء سیف بن حمود', bn: 'মা\' সাইফ বিন হাম্মুদ' },
+  'القواسي الصغار': { en: 'Al-Qawāsi As-Sighār', ur: 'القواسی الصغار', bn: 'আল-কাওয়াসি আস-সিগার' },
+  'القواسي الكبار': { en: 'Al-Qawāsi Al-Kibār', ur: 'القواسی الکبار', bn: 'আল-কাওয়াসি আল-কিবার' },
+  'الخالص': { en: 'Al-Khālis', ur: 'الخالص', bn: 'আল-খালিস' },
+  'القصدة': { en: 'Al-Qasda', ur: 'القصدہ', bn: 'আল-কাসদা' },
+  'الخن': { en: 'Al-Khann', ur: 'الخن', bn: 'আল-খান্ন' },
+  'الفرهم': { en: 'Al-Farham', ur: 'الفرہم', bn: 'আল-ফারহাম' },
+  'بادة فارس': { en: 'Bādat Fāris', ur: 'بادہ فارس', bn: 'বাদাত ফারিস' },
+  'ربع البانيان': { en: 'Rub\' Al-Bāniyān', ur: 'ربع البانیان', bn: 'রুব\' আল-বানিয়ান' },
+  'خمس الجوع': { en: 'Khums Al-Jū\'', ur: 'خمس الجوع', bn: 'খুমস আল-জু' },
+  'الخبيبة': { en: 'Al-Khubayba', ur: 'الخبیبہ', bn: 'আল-খুবাইবা' },
+  'الخبيبه': { en: 'Al-Khubayba', ur: 'الخبیبہ', bn: 'আল-খুবাইবা' },
+  'ربع الخبيبة': { en: 'Rub\' Al-Khubayba', ur: 'ربع الخبیبہ', bn: 'রুব\' আল-খুবাইবা' },
+  'ربع الخبيبه': { en: 'Rub\' Al-Khubayba', ur: 'ربع الخبیبہ', bn: 'রুব\' আল-খুবাইবা' },
+  'العنانية الأولى': { en: 'Al-\'Anāniyya Al-Ūla', ur: 'العنانیہ الأولى', bn: 'আল-আনানিয়্যা আল-উলা' },
+  'العنانية الثانية': { en: 'Al-\'Anāniyya Ath-Thāniya', ur: 'العنانیہ الثانیہ', bn: 'আল-আনানিয়্যা আছ-ছানিয়া' },
+  'عنانية هلال بن ناصر': { en: '\'Anāniyyat Hilāl bin Nāsir', ur: 'عنانیہ ہلال بن ناصر', bn: 'আনানিয়্যাত হিলাল বিন নাসির' },
+  'عنانية علي بن حمود': { en: '\'Anāniyyat Ali bin Hammūd', ur: 'عنانیہ علی بن حمود', bn: 'আনানিয়্যাত আলি বিন হাম্মুদ' },
+  'ماء سالم بن سعيد': { en: 'Mā\' Sālim bin Sa\'īd', ur: 'ماء سالم بن سعید', bn: 'মা\' সালিম বিন সাঈদ' },
+  'الجويعدة': { en: 'Al-Juway\'ida', ur: 'الجویعدہ', bn: 'আল-জুওয়াইদা' },
+  'الجويعده': { en: 'Al-Juway\'ida', ur: 'الجویعدہ', bn: 'আল-জুওয়াইদা' },
+  'ربع الحب': { en: 'Rub\' Al-Habb', ur: 'ربع الحب', bn: 'রুব\' আল-হাব্ব' },
+  'جمار قضيب': { en: 'Jammār Qadīb', ur: 'جمار قضیب', bn: 'জাম্মার কাদিব' },
+  'ربع الفدام': { en: 'Rub\' Al-Fadām', ur: 'ربع الفدام', bn: 'রুব\' আল-ফাদাম' },
+  'البيدارة': { en: 'Al-Baydāra', ur: 'البیدارہ', bn: 'আল-বাইদারা' },
+  'الغتلين': { en: 'Al-Ghatlīn', ur: 'الغتلین', bn: 'আল-গাতলিন' },
+  'الغلين': { en: 'Al-Ghatlīn', ur: 'الغلین', bn: 'আল-গাতলিন' },
+  'الشراك': { en: 'Ash-Shirāk', ur: 'الشراک', bn: 'আশ-শিরাক' },
+  'الوقفان': { en: 'Al-Waqfān', ur: 'الوقفان', bn: 'আল-ওয়াকফান' },
+  'ماء الوصية': { en: 'Mā\' Al-Wasiyya', ur: 'ماء الوصیہ', bn: 'মা\' আল-ওয়াসিয়্যা' },
+  'عزر هلال بن ناصر والسركال': { en: '\'Azr Hilāl bin Nāsir wa As-Sarkāl', ur: 'عزر ہلال بن ناصر والسرکال', bn: 'আযর হিলাল বিন নাসির ওয়া আস-সারকাল' },
+  'عزر هلال بن أحمد': { en: '\'Azr Hilāl bin Ahmad', ur: 'عزر ہلال بن أحمد', bn: 'আযর হিলাল বিন আহমাদ' },
+  'عزر هلال بن احمد': { en: '\'Azr Hilāl bin Ahmad', ur: 'عزر ہلال بن احمد', bn: 'আযর হিলাল বিন আহমাদ' },
+  'الجمار': { en: 'Al-Jammār', ur: 'الجمار', bn: 'আল-জাম্মার' },
+  'الشايع': { en: 'Ash-Shāyi\'', ur: 'الشایع', bn: 'আশ-শাইয়িআ' },
+  'الجوازي': { en: 'Al-Jawāzi', ur: 'الجوازی', bn: 'আল-জাওয়াযি' },
+  'مقفول نزوى': { en: 'Maqfūl Nizwa', ur: 'مقفول نزوى', bn: 'মাকফুল নিযওয়া' },
+  'ربع الجمار': { en: 'Rub\' Al-Jammār', ur: 'ربع الجمار', bn: 'রুব\' আল-জাম্মার' },
+  'ربع المالكية': { en: 'Rub\' Al-Mālikiyya', ur: 'ربع المالکیہ', bn: 'রুব\' আল-মালিকিয়্যা' },
+  'ما الصخيبية': { en: 'Mā\' As-Sukhaybiyya', ur: 'ما الصخیبیہ', bn: 'মা\' আস-সুখাইবিয়্যা' },
+  'ماء الصخيبية': { en: 'Mā\' As-Sukhaybiyya', ur: 'ماء الصخیبیہ', bn: 'মা\' আস-সুখাইবিয়্যা' },
+  'مقصورة السوق': { en: 'Maqsūrat As-Sūq', ur: 'مقصورۃ السوق', bn: 'মাকসুরাত আস-সুক' },
+  'الأذان': { en: 'Al-Adhān', ur: 'الاذان', bn: 'আল-আযান' },
+  'الاذان': { en: 'Al-Adhān', ur: 'الاذان', bn: 'আল-আযান' },
+  'الصنهار': { en: 'As-Sanhār', ur: 'الصنہار', bn: 'আস-সানহার' },
+  'طياح الظلة': { en: 'Tayyāh Az-Zilla', ur: 'طیاح الظلہ', bn: 'তাইয়াহ আয-যিল্লা' },
+  'طياح الظله': { en: 'Tayyāh Az-Zilla', ur: 'طیاح الظلہ', bn: 'তাইয়াহ আয-যিল্লা' },
+  'طياح الظل': { en: 'Tayyāh Az-Zill', ur: 'طیاح الظل', bn: 'তাইয়াহ আয-যিল্ল' },
+  'ظل 7': { en: 'Zill 7', ur: 'ظل 7', bn: 'যিল্ল ৭' },
+  'ظل 8': { en: 'Zill 8', ur: 'ظل 8', bn: 'যিল্ল ৮' },
+  'ظل 9': { en: 'Zill 9', ur: 'ظل 9', bn: 'যিল্ল ৯' },
+  'ظل 12': { en: 'Zill 12', ur: 'ظل 12', bn: 'যিল্ল ১২' },
+  'ظل 15': { en: 'Zill 15', ur: 'ظل 15', bn: 'যিল্ল ১৫' },
+  'ظل 16': { en: 'Zill 16', ur: 'ظل 16', bn: 'যিল্ল ১৬' },
+  'ظل 18': { en: 'Zill 18', ur: 'ظل 18', bn: 'যিল্ল ১৮' },
+  'ظل 22': { en: 'Zill 22', ur: 'ظل 22', bn: 'যিল্ল ২২' },
+  'ظل 32': { en: 'Zill 32', ur: 'ظل 32', bn: 'যিল্ল ৩২' },
+  'ظل 17 الصبح': { en: 'Zill 17 As-Subh', ur: 'ظل 17 الصبح', bn: 'যিল্ল ১৭ আস-সুবহ' },
+  'ظل 17 صباح الأربعاء': { en: 'Zill 17 Sabāh Al-Arbi\'ā\'', ur: 'ظل 17 صبح الأربعاء', bn: 'যিল্ল ১৭ সাবাহ আল-আরবিআ' },
+  'ظل 17 صباح الاربعاء': { en: 'Zill 17 Sabāh Al-Arbi\'ā\'', ur: 'ظل 17 صبح الاربعاء', bn: 'যিল্ল ১৭ সাবাহ আল-আরবিআ' },
+  'سلم الشمس': { en: 'Sullam Ash-Shams', ur: 'سلم الشمس', bn: 'সুল্লাম আশ-শামস' },
+  '12 ونصف': { en: '12 wa Nisf', ur: '12 و نصف', bn: '১২ ওয়া নিসফ' },
+  '12 ونصف عربي': { en: '12 wa Nisf \'Arabi', ur: '12 و نصف عربی', bn: '১২ ওয়া নিসফ আরাবি' },
+  '11': { en: '11', ur: '11', bn: '১১' },
+  '11 ونصف': { en: '11 wa Nisf', ur: '11 و نصف', bn: '১১ ওয়া নিসফ' },
+  '10 ونصف': { en: '10 wa Nisf', ur: '10 و نصف', bn: '১০ ওয়া নিসফ' },
+  '10 ونصف عربي': { en: '10 wa Nisf \'Arabi', ur: '10 و نصف عربی', bn: '১০ ওয়া নিসফ আরাবি' },
+  '10 ونصف عربي العصر': { en: '10 wa Nisf \'Arabi Al-\'Asr', ur: '10 و نصف عربی العصر', bn: '১০ ওয়া নিসফ আরাবি আল-আসর' },
+  '9 ونصف': { en: '9 wa Nisf', ur: '9 و نصف', bn: '৯ ওয়া নিসফ' },
+  'نصف الليل': { en: 'Nisf Al-Layl', ur: 'نصف اللیل', bn: 'নিসফ আল-লাইল' },
+  'صنهار روحه': { en: 'Sanhār Rūhuh', ur: 'صنہار روحہ', bn: 'সানহার রুহুহ' },
+  'صنهار روحه (ظل)': { en: 'Sanhār Rūhuh (Zill)', ur: 'صنہار روحہ (ظل)', bn: 'সানহার রুহুহ (যিল্ল)' },
+  'صنهار روحه ( ظل )': { en: 'Sanhār Rūhuh (Zill)', ur: 'صنہار روحہ (ظل)', bn: 'সানহার রুহুহ (যিল্ল)' },
+  'احتراف جماعة': { en: 'Ihtirāf Jamā\'a', ur: 'احتراف جماعہ', bn: 'ইহতিরাফ জামাআ' },
+  'احتراف جماعه': { en: 'Ihtirāf Jamā\'a', ur: 'احتراف جماعہ', bn: 'ইহতিরাফ জামাআ' },
+  'القروح': { en: 'Al-Qurūh', ur: 'القروح', bn: 'আল-কুরুহ' },
+  'القروح (بعد أذان الفجر بربع)': { en: 'Al-Qurūh (15min after Fajr)', ur: 'القروح (فجر کے بعد ربع گھنٹہ)', bn: 'আল-কুরুহ (ফজরের ১৫ মিনিট পর)' },
+  'القروح قبل اذان الفجر بربع ساعه': { en: 'Al-Qurūh (15min before Fajr)', ur: 'القروح (فجر سے ربع گھنٹہ قبل)', bn: 'আল-কুরুহ (ফজরের ১৫ মিনিট আগে)' },
+  'أذان المغرب': { en: 'Adhān Al-Maghrib', ur: 'اذان المغرب', bn: 'আযান আল-মাগরিব' },
+  'اذان المغرب': { en: 'Adhān Al-Maghrib', ur: 'اذان المغرب', bn: 'আযান আল-মাগরিব' },
+  'لذان المغرب': { en: 'Adhān Al-Maghrib', ur: 'اذان المغرب', bn: 'আযান আল-মাগরিব' },
+  'اذان الواشحي': { en: 'Adhān Al-Washhi', ur: 'اذان الواشحی', bn: 'আযান আল-ওয়াশহি' },
+  'طلع الشمس': { en: 'Tulū\' Ash-Shams', ur: 'طلع الشمس', bn: 'তুলু আশ-শামস' },
+  'طلع الشمس بأثر': { en: 'Tulū\' Ash-Shams bi-Athar', ur: 'طلع الشمس باثر', bn: 'তুলু আশ-শামস বি-আছার' },
+  'الوقوف': { en: 'Al-Wuqūf', ur: 'الوقوف', bn: 'আল-উকুফ' },
+  'شمس أثر': { en: 'Shams Athar', ur: 'شمس اثر', bn: 'শামস আছার' },
+  'شمس اثر': { en: 'Shams Athar', ur: 'شمس اثر', bn: 'শামস আছার' },
+  'الشمس أثر': { en: 'Ash-Shams Athar', ur: 'الشمس اثر', bn: 'আশ-শামস আছার' },
+  'الشمس اثر': { en: 'Ash-Shams Athar', ur: 'الشمس اثر', bn: 'আশ-শামস আছার' },
+  'قبل الأذان بساعة': { en: '1hr before Adhān', ur: 'اذان سے ایک گھنٹہ قبل', bn: 'আযানের ১ ঘণ্টা আগে' },
+  'قبل الأذان بساعه': { en: '1hr before Adhān', ur: 'اذان سے ایک گھنٹہ قبل', bn: 'আযানের ১ ঘণ্টা আগে' },
+  'قبل الاذان بساعه': { en: '1hr before Adhān', ur: 'اذان سے ایک گھنٹہ قبل', bn: 'আযানের ১ ঘণ্টা আগে' },
+  'أذان الفجر': { en: 'Adhān Al-Fajr', ur: 'اذان الفجر', bn: 'আযান আল-ফজর' },
+  'الساعة 11': { en: '11 oclock', ur: '11 بجے', bn: '১১টা' },
+  'الساعه 11': { en: '11 oclock', ur: '11 بجے', bn: '১১টা' },
+  'الساعة 11 العصر': { en: '11 oclock (Asr)', ur: '11 بجے (عصر)', bn: '১১টা (আসর)' },
+  'الساعه 11 العصر': { en: '11 oclock (Asr)', ur: '11 بجے (عصر)', bn: '১১টা (আসর)' },
+  'الساعة 11 من المخيل': { en: '11 oclock (sundial)', ur: '11 بجے (مخیل)', bn: '১১টা (সূর্যঘড়ি)' },
+  'من 7 ونصف ع': { en: 'from 7:30 \'Arabi', ur: '7:30 عربی سے', bn: '৭:৩০ আরাবি থেকে' },
+  'الى 7 ونصف عربي': { en: 'until 7:30 \'Arabi', ur: '7:30 عربی تک', bn: '৭:৩০ আরাবি পর্যন্ত' },
+  'من 9 ونصف': { en: 'from 9:30', ur: '9:30 سے', bn: '৯:৩০ থেকে' },
+  'من نصف الليل': { en: 'from midnight', ur: 'آدھی رات سے', bn: 'মধ্যরাত থেকে' },
+  'قضيان الربع': { en: 'Qadyān Ar-Rub\'', ur: 'قضیان الربع', bn: 'কাদইয়ান আর-রুব\'' },
+  'آخر نهار الربع': { en: 'Ākhir Nahār Ar-Rub\'', ur: 'آخر نہار الربع', bn: 'আখির নাহার আর-রুব\'' },
+  'اخر نهار الربع': { en: 'Ākhir Nahār Ar-Rub\'', ur: 'آخر نہار الربع', bn: 'আখির নাহার আর-রুব\'' },
+  'آخر الليل الربع': { en: 'Ākhir Al-Layl Ar-Rub\'', ur: 'آخر اللیل الربع', bn: 'আখির আল-লাইল আর-রুব\'' },
+  'آخر ليل الربع': { en: 'Ākhir Layl Ar-Rub\'', ur: 'آخر لیل الربع', bn: 'আখির লাইল আর-রুব\'' },
+  'اخر الليل الربع': { en: 'Ākhir Al-Layl Ar-Rub\'', ur: 'آخر اللیل الربع', bn: 'আখির আল-লাইল আর-রুব\'' },
+  'اخر ليل الربع': { en: 'Ākhir Layl Ar-Rub\'', ur: 'آخر لیل الربع', bn: 'আখির লাইল আর-রুব\'' },
+  'قيام سنة المغرب': { en: 'Qiyām Sunnat Al-Maghrib', ur: 'قیام سنۃ المغرب', bn: 'কিয়াম সুন্নাত আল-মাগরিব' },
+  'الجمعة': { en: 'Friday', ur: 'جمعہ', bn: 'শুক্রবার' },
+  'السبت': { en: 'Saturday', ur: 'ہفتہ', bn: 'শনিবার' },
+  'الأحد': { en: 'Sunday', ur: 'اتوار', bn: 'রবিবার' },
+  'الاثنين': { en: 'Monday', ur: 'پیر', bn: 'সোমবার' },
+  'الثلاثاء': { en: 'Tuesday', ur: 'منگل', bn: 'মঙ্গলবার' },
+  'الأربعاء': { en: 'Wednesday', ur: 'بدھ', bn: 'বুধবার' },
+  'الخميس': { en: 'Thursday', ur: 'جمعرات', bn: 'বৃহস্পতিবার' },
+  '24 ساعة - ملك عام بالمزايدة': { en: '24 hrs — public ownership by auction', ur: '24 گھنٹے - عوامی ملکیت (نیلامی)', bn: '২৪ ঘণ্টা — নিলামে সাধারণ মালিকানা' },
+  '24 ساعة - شايعه لشراباتها مع أصحاب الفضله': { en: '24 hrs — shared with surplus-water owners', ur: '24 گھنٹے - فاضل پانی والوں کے ساتھ مشترک', bn: '২৪ ঘণ্টা — উদ্বৃত্ত পানির মালিকদের সাথে অংশীদার' },
+};
+
+function tr(text) {
+  if (!text || currentLang === 'ar') return text;
+  const entry = TR[text];
+  if (!entry) return text;
+  return entry[currentLang] || text;
+}
+
+let currentLang = 'ar';
+let currentDevice = 'desktop';
+let currentWeekOffset = 0;
+let currentView = 'week';
+let selectedDay = null;
+
+// ======== ANCHOR — links cycle to device calendar ========
+// 17 April 2026 (Friday) = Day 1 of the 56-day cycle.
+// This makes Friday 8 May 2026 correspond to Day 22.
+const ANCHOR_DATE = new Date(2026, 3, 17); // April 17, 2026 (month is 0-indexed)
+const CYCLE_LENGTH = 56;
+
+// ======== HELPERS ========
+function startOfDay(d) {
+  const x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  return x;
+}
+
+function getCycleDay(date) {
+  const msPerDay = 24 * 60 * 60 * 1000;
+  const a = startOfDay(ANCHOR_DATE);
+  const b = startOfDay(date);
+  const diff = Math.round((b - a) / msPerDay);
+  // Day 1 = anchor, Day 2 = anchor+1, ..., Day 56 = anchor+55, then repeats.
+  let r = ((diff % CYCLE_LENGTH) + CYCLE_LENGTH) % CYCLE_LENGTH;
+  return r + 1;
+}
+
+function formatDate(d) {
+  const L = LANG_NAMES[currentLang];
+  return d.toLocaleDateString(L.locale, { day: 'numeric', month: 'long', year: 'numeric' });
+}
+function formatDateShort(d) {
+  const L = LANG_NAMES[currentLang];
+  return d.toLocaleDateString(L.locale, { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function getWeekStartDate() {
+  // weekStart = Friday (Falaj week begins on Friday — the Qa'd day).
+  // JS dow: 0=Sun,1=Mon,2=Tue,3=Wed,4=Thu,5=Fri,6=Sat
+  const today = startOfDay(new Date());
+  const dow = today.getDay();
+  const daysSinceFri = (dow + 7 - 5) % 7;
+  const fri = new Date(today);
+  fri.setDate(today.getDate() - daysSinceFri + (currentWeekOffset * 7));
+  return fri;
+}
+
+function isToday(d) {
+  const now = new Date();
+  return d.getFullYear() === now.getFullYear() &&
+         d.getMonth() === now.getMonth() &&
+         d.getDate() === now.getDate();
+}
+
+function isQadDay(cycleDay) {
+  const dd = CYCLE_DATA[cycleDay];
+  return dd && dd.badas.some(b => b.isQad);
+}
+
+// ======== RENDER ========
+function renderTodayBanner() {
+  // Always reads from the device's actual current date.
+  const today = new Date();
+  const cycleDay = getCycleDay(today);
+  const data = CYCLE_DATA[cycleDay];
+  const banner = document.getElementById('todayBanner');
+  const info = document.getElementById('todayInfo');
+  const detail = document.getElementById('todayDetail');
+  const badge = document.getElementById('todayBadge');
+  const L = LANG_NAMES[currentLang];
+
+  const qad = data && data.badas.some(b => b.isQad);
+  banner.className = 'today-banner' + (qad ? ' is-qad' : '');
+
+  const dayNameDisplay = data ? tr(data.dayName) : '';
+  info.textContent = `${L.today}: ${formatDate(today)} | ${L.cycleDay} ${cycleDay} ${L.fromCycle} | ${dayNameDisplay}`;
+
+  const firstBada = data && data.badas[0] ? tr(data.badas[0].name) : '';
+  detail.textContent = firstBada ? `${L.firstBada}: ${firstBada}` : '';
+  badge.textContent = qad ? L.qadLabel : L.greenLabel;
+}
+
+function renderWeek() {
+  const weekStart = getWeekStartDate();
+  const grid = document.getElementById('weekView');
+  const L = LANG_NAMES[currentLang];
+
+  const weekEnd = new Date(weekStart);
+  weekEnd.setDate(weekEnd.getDate() + 6);
+  const titleStr = L.dir === 'rtl'
+    ? `${formatDateShort(weekEnd)} — ${formatDateShort(weekStart)}`
+    : `${formatDateShort(weekStart)} — ${formatDateShort(weekEnd)}`;
+  document.getElementById('weekTitle').textContent = titleStr;
+
+  let html = '<div class="week-grid">';
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(weekStart);
+    d.setDate(weekStart.getDate() + i);
+    const cycleDay = getCycleDay(d);
+    const dayData = CYCLE_DATA[cycleDay];
+    const todayClass = isToday(d) ? 'is-today' : '';
+    const qadClass = isQadDay(cycleDay) ? 'is-qad-day' : '';
+    const dayNameDisplay = dayData ? tr(dayData.dayName) : '';
+    const arrow = L.timeArrowFwd;
+
+    html += `<div class="day-col ${todayClass} ${qadClass}" onclick="selectDay(${d.getTime()})">`;
+    html += `<div class="day-header">`;
+    html += `<div class="day-name">${dayNameDisplay}</div>`;
+    html += `<div class="day-date">${formatDateShort(d)}</div>`;
+    html += `<div class="day-num">${cycleDay}</div>`;
+    html += `</div>`;
+    html += `<div class="bada-list">`;
+    if (dayData && dayData.badas.length) {
+      dayData.badas.forEach(b => {
+        const qCls = b.isQad ? 'qad' : '';
+        html += `<div class="bada-chip ${qCls}">`;
+        html += `<div class="bada-name">${tr(b.name)}</div>`;
+        html += `<div class="bada-time">${tr(b.from)} ${arrow} ${tr(b.to)}</div>`;
+        html += `</div>`;
+      });
+    } else {
+      html += `<div style="padding:8px;font-size:0.75rem;color:#aaa">—</div>`;
+    }
+    html += `</div></div>`;
+  }
+  html += '</div>';
+  grid.innerHTML = html;
+
+  // Progress bar
+  const today = startOfDay(new Date());
+  const todayCycleDay = getCycleDay(today);
+  const pct = Math.round((todayCycleDay / CYCLE_LENGTH) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressVal').textContent = `${todayCycleDay} / ${CYCLE_LENGTH}`;
+}
+
+function renderDayView(timestamp) {
+  // If no timestamp passed, use the device's current date.
+  const d = timestamp ? new Date(timestamp) : new Date();
+  const cycleDay = getCycleDay(d);
+  const dayData = CYCLE_DATA[cycleDay];
+  const qad = dayData && dayData.badas.some(b => b.isQad);
+  const L = LANG_NAMES[currentLang];
+
+  const view = document.getElementById('dayView');
+  let html = `<div class="day-view">`;
+  html += `<div class="day-view-header ${qad ? 'is-qad' : ''}">`;
+  html += `<div>`;
+  const dayNameDisplay = dayData ? tr(dayData.dayName) : '';
+  html += `<div class="day-view-title">${dayNameDisplay} - ${formatDate(d)}</div>`;
+  html += `<div class="day-view-sub">${qad ? L.qadDayLabel : L.todayBadasLabel}</div>`;
+  html += `</div>`;
+  html += `<div class="day-view-cycle">${L.dayOfCycle} ${cycleDay} ${L.fromCycleShort}</div>`;
+  html += `</div>`;
+  html += `<div class="bada-table">`;
+
+  if (dayData && dayData.badas.length) {
+    dayData.badas.forEach((b, idx) => {
+      const arrow = L.timeArrowFwd === '←' ? '→' : '→';
+      html += `<div class="bada-row ${b.isQad ? 'qad-row' : ''}">`;
+      html += `<div class="bada-row-name">${idx + 1}. ${tr(b.name)}</div>`;
+      html += `<div class="bada-row-time">${tr(b.from)} <span class="time-arrow">${arrow}</span> ${tr(b.to)}</div>`;
+      if (b.note) html += `<div class="bada-row-note">${tr(b.note)}</div>`;
+      else html += `<div></div>`;
+      html += `</div>`;
+    });
+  } else {
+    html += `<div class="no-bada">${L.noData}</div>`;
+  }
+  html += `</div></div>`;
+  view.innerHTML = html;
+}
+
+// ======== ACTIONS ========
+function setView(v) {
+  currentView = v;
+  document.getElementById('weekView').classList.toggle('hidden', v !== 'week');
+  document.getElementById('dayView').classList.toggle('hidden', v !== 'day');
+  document.getElementById('btnWeek').classList.toggle('active', v === 'week');
+  document.getElementById('btnDay').classList.toggle('active', v === 'day');
+  if (v === 'day') renderDayView(selectedDay);
+}
+
+function selectDay(timestamp) {
+  // When a day cell is clicked, show its full breakdown for that real
+  // calendar date (passed in via the device's Date object timestamp).
+  selectedDay = timestamp;
+  setView('day');
+}
+
+function changeWeek(delta) {
+  currentWeekOffset += delta;
+  renderWeek();
+}
+
+function goToToday() {
+  // Reset to the device's actual "this week".
+  currentWeekOffset = 0;
+  selectedDay = new Date().getTime();
+  setView('day');
+}
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+  const L = LANG_NAMES[lang];
+  document.body.style.direction = L.dir;
+  document.body.setAttribute('lang', lang);
+  document.documentElement.setAttribute('lang', lang);
+  document.documentElement.setAttribute('dir', L.dir);
+  refreshStaticLabels();
+  renderTodayBanner();
+  renderWeek();
+  if (currentView === 'day') renderDayView(selectedDay);
+}
+
+function refreshStaticLabels() {
+  const L = LANG_NAMES[currentLang];
+  setText('docNote', L.docNote);
+  setText('headerSubtitle', L.subtitle);
+  setText('badgeCycle', L.badgeCycle);
+  setText('badgeDist', L.badgeDist);
+  setText('badgeCal', L.badgeCal);
+  setText('legendQad', L.legendQad);
+  setText('legendRest', L.legendRest);
+  setText('btnPrev', L.prevWeek);
+  setText('btnTodayNav', L.todayBtn);
+  setText('btnNext', L.nextWeek);
+  setText('btnWeek', L.weekBtn);
+  setText('btnDay', L.dayBtn);
+  // Device toggle (preserve SVG)
+  setDeviceBtnLabel('btnDesktop', L.desktop);
+  setDeviceBtnLabel('btnMobile', L.mobile);
+  setText('progressLabel', L.cycle56);
+  setText('downloadLabel', L.download);
+  setText('pageCredit', L.pageCredit);
+}
+
+function setText(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = text;
+}
+function setDeviceBtnLabel(id, label) {
+  const btn = document.getElementById(id);
+  if (!btn) return;
+  const span = btn.querySelector('span');
+  if (span) span.textContent = label;
+}
+
+function setDevice(device) {
+  currentDevice = device;
+  document.getElementById('btnDesktop').classList.toggle('active', device === 'desktop');
+  document.getElementById('btnMobile').classList.toggle('active', device === 'mobile');
+  document.body.classList.toggle('mobile-view', device === 'mobile');
+}
+
+// ======== DOWNLOAD CURRENT WEEK AS IMAGE ========
+async function downloadWeekImage() {
+  const btn = document.getElementById('downloadBtn');
+  const label = document.getElementById('downloadLabel');
+  const L = LANG_NAMES[currentLang];
+  const originalLabel = label.textContent;
+
+  // Switch to week view if on day view (we are downloading the week)
+  const wasDayView = currentView === 'day';
+  if (wasDayView) setView('week');
+
+  // Build a temporary off-screen "card" containing only the current week
+  // (week grid + a small header) so the image is clean.
+  const weekGrid = document.querySelector('#weekView .week-grid');
+  if (!weekGrid) {
+    alert('No week view to capture.');
+    if (wasDayView) setView('day');
+    return;
+  }
+
+  btn.disabled = true;
+  label.textContent = L.downloading;
+
+  // Compose a wrapper for the image with header + legend
+  const wrap = document.createElement('div');
+  wrap.style.position = 'fixed';
+  wrap.style.left = '-10000px';
+  wrap.style.top = '0';
+  wrap.style.width = '1400px';
+  wrap.style.padding = '24px';
+  wrap.style.background = '#f5f0e8';
+  wrap.style.fontFamily = getComputedStyle(document.body).fontFamily;
+  wrap.setAttribute('dir', L.dir);
+
+  const today = new Date();
+  const cycleDay = getCycleDay(today);
+
+  const header = document.createElement('div');
+  header.style.cssText = 'background:linear-gradient(135deg,#1b4332,#40916c);color:#fff;padding:18px 22px;border-radius:12px 12px 0 0;text-align:center;';
+  header.innerHTML = `
+    <div style="font-family:'Scheherazade New',serif;font-size:1.8rem;font-weight:700">🌊 فلج الواشحي</div>
+    <div style="font-size:0.95rem;opacity:0.9;margin-top:4px">${L.subtitle}</div>
+    <div style="font-size:0.85rem;opacity:0.85;margin-top:8px">${document.getElementById('weekTitle').textContent} • ${L.cycleDay} ${cycleDay} / ${CYCLE_LENGTH}</div>
+  `;
+  const clone = weekGrid.cloneNode(true);
+  clone.style.margin = '0';
+  clone.style.borderRadius = '0 0 12px 12px';
+  clone.style.borderTop = 'none';
+  // Keep colors crisp in the export
+  clone.querySelectorAll('.day-col').forEach(c => { c.style.minHeight = '180px'; });
+
+  const footer = document.createElement('div');
+  footer.style.cssText = 'text-align:center;padding:12px;font-size:0.8rem;color:#6b6b6b;background:#ece5d8;border-radius:0 0 12px 12px;margin-top:-12px;';
+  footer.textContent = L.pageCredit;
+
+  wrap.appendChild(header);
+  wrap.appendChild(clone);
+  wrap.appendChild(footer);
+  document.body.appendChild(wrap);
+
+  try {
+    const canvas = await html2canvas(wrap, {
+      backgroundColor: '#f5f0e8',
+      scale: 2,
+      useCORS: true,
+      logging: false
+    });
+    const link = document.createElement('a');
+    const today2 = new Date();
+    const fname = `falaj_week_${today2.getFullYear()}-${String(today2.getMonth()+1).padStart(2,'0')}-${String(today2.getDate()).padStart(2,'0')}.png`;
+    link.download = fname;
+    link.href = canvas.toDataURL('image/png');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } catch (e) {
+    console.error('Image download failed:', e);
+    alert('Download failed: ' + e.message);
+  } finally {
+    document.body.removeChild(wrap);
+    btn.disabled = false;
+    label.textContent = originalLabel;
+    if (wasDayView) setView('day');
+  }
+}
+
+// ======== INIT ========
+refreshStaticLabels();
+renderTodayBanner();
+renderWeek();
+setView('week');
+
+// Auto-refresh once a day if the page stays open across midnight,
+// so the "today" view always reflects the device's real current date.
+setInterval(() => {
+  // Re-render banner + week so the "today" highlight tracks the device clock.
+  renderTodayBanner();
+  if (currentView === 'week') renderWeek();
+  else renderDayView(selectedDay);
+}, 60 * 1000);
+</script>
+</body>
+</html>
